@@ -2,10 +2,10 @@ resource "aws_security_group" "web" {
   name = "web-sg"
   description = "Allow http and https ingress, allow everything to egress"
 
-  vpc_id = module.vpc.id
+  vpc_id = module.vpc.vpc_id
 }
 
-resource "aws_security_group_rules" "web_http_in" {
+resource "aws_security_group_rule" "web_http_in" {
     type = "ingress"
     from_port = 80
     to_port = 80
@@ -15,7 +15,7 @@ resource "aws_security_group_rules" "web_http_in" {
     security_group_id = aws_security_group.web.id
 }
 
-resource "aws_security_group_rules" "web_https_in" {
+resource "aws_security_group_rule" "web_https_in" {
     type = "ingress"
     from_port = 443
     to_port = 443
@@ -25,7 +25,7 @@ resource "aws_security_group_rules" "web_https_in" {
     security_group_id = aws_security_group.web.id
 }
 
-resource "aws_security_group_rules" "web_egress_in" {
+resource "aws_security_group_rule" "web_egress_in" {
     type = "egress"
     from_port = 0
     to_port = 0
