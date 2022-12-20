@@ -1,4 +1,4 @@
-module "security-group" {
+module "web_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "4.16.2"
   name = "web_sg"
