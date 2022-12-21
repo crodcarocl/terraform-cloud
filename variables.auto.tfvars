@@ -8,7 +8,8 @@ vpc_config = {
 }
 
 environment = {
-  env_name = "development"
+  env_name  = "development"
+  env_short = "devel"
 }
 
 project_config = {

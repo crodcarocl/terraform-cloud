@@ -13,13 +13,12 @@ variable "security_groups" {
     type = list(string)
 }
 
-
 variable "name" {
     description = "Loadbalancer Name"
     type = string
 }
 
-variable "env_name" {
+variable "env_short" {
     description = "Environment Name"
     type = string
 }

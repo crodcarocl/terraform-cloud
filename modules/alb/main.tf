@@ -2,7 +2,7 @@ module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 8.0"
 
-  name               = "${var.env_name}-${var.name}"
+  name               = "${var.name}"
   load_balancer_type = var.load_balancer_type
 
   vpc_id             = var.vpc_id
@@ -11,7 +11,7 @@ module "alb" {
 
   target_groups = [
     {
-      name_prefix      = "${var.env_name}-"
+      name_prefix      = "${var.env_short}-"
       backend_protocol = "HTTP"
       backend_port     = 80
       target_type      = "instance"

@@ -7,10 +7,12 @@ variable "environment" {
     description = "Environment name"
 
     type = object ({
-      env_name = string
+      env_name  = string
+      env_short = string
     })
     default = {
       env_name = "development"
+      env_short = "devel"
     }
 }
 
