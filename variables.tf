@@ -30,7 +30,7 @@ variable "project_config" {
     }
 }
 
-variable "vpc_configs" {
+variable "vpc_config" {
   description = "VPC Config variables"
 
   type = object ({
