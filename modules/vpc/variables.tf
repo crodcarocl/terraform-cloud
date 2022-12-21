@@ -18,10 +18,9 @@ variable "project_config" {
     
     default = {
        project_tags = {
-        Environment  = var.environment.env_name
-        creationDate = timestamp()
-        createdBy    = crodcarocl
-        projectName  = crodcaro-testing
+        Environment  = "development",
+        createdBy    = "crodcarocl",
+        projectName  = "crodcaro-testing"
        }
     }
 }
