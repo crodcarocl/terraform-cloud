@@ -1,38 +1,29 @@
-variable "environment" {
-    description = "Environment name"
-
-    type = object ({
-      env_name = string
-    })
-    default = {
-      env_name = "development"
-    }
-}
-
-variable "project_config" {
+variable "tags" {
     description = "Custom project configs"
-
-    type = object ({
-      project_tags = map(string)
-    }) 
-    
-    default = {
-      project_tags = {
-        Environment  = "development",
-        createdBy    = "crodcarocl",
-        projectName  = "crodcaro-testing"
-       }
-    }
+    type = map(string)
 }
 
-variable "vpc_config" {
-  description = "VPC Config variables"
+variable "name" {
+  description = "VPC project name"
+  type = string
+}
 
-  type = object ({
-    vpc_name            = string
-    vpc_cidr            = string
-    vpc_azs             = list(string)
-    vpc_private_subnets = list(string)
-    vpc_public_subnets  = list(string)
-  })
+variable "cidr" {
+  description = "VPC cidr address"
+  type = string
+}
+
+variable "azs" {
+  description = "VPC availability zones"
+  type = string
+}
+
+variable "private_subnets" {
+  description = "VPC private subnets"
+  type = string
+}
+
+variable "public_subnets" {
+  description = "VPC public subnets"
+  type = string
 }

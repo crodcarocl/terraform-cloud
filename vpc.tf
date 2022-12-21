@@ -1,11 +1,3 @@
-locals {
-
-  vpc_config = {
-    vpc_name = var.vpc_config.vpc_name
-  }
-}
-
-
 module "vpc" {
   source = "./modules/vpc"
 
