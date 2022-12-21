@@ -14,6 +14,6 @@ variable "load_balancer_type" {
 }
 
 variable "tags" {
-    description = "Project Tags"
+    description = "Custom Project Tags"
     type = map(string)
 }

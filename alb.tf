@@ -4,6 +4,6 @@ module "web_alb" {
   name               = var.alb_config.alb_name
   load_balancer_type = var.alb_config.load_balancer_type
 
-  tags = var.project_config.tags
+  tags = var.project_config.project_tags
   env_name = var.environment.env_name
 }

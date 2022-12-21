@@ -1,10 +1,10 @@
 variable "tags" {
-    description = "Custom project configs"
+    description = "Custom project tags"
     type = map(string)
 }
 
 variable "nat_gateway_tags" {
-    description = "Custom project configs"
+    description = "Custom project tags"
     type = map(string)
 }
 
