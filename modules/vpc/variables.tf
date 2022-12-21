@@ -18,9 +18,9 @@ variable "project_config" {
     
     default = {
        project_tags = {
-        Environment  = "development",
-        createdBy    = "crodcarocl",
-        projectName  = "crodcaro-testing"
+         Environment  = "development",
+         createdBy    = "crodcarocl",
+         projectName  = "crodcaro-testing"
        }
     }
 }
