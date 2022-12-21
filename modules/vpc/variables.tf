@@ -3,6 +3,11 @@ variable "tags" {
     type = map(string)
 }
 
+variable "nat_gateway_tags" {
+    description = "Custom project configs"
+    type = map(string)
+}
+
 variable "name" {
   description = "VPC project name"
   type = string
