@@ -1,5 +1,5 @@
 # VPC Variables
-vpc_config {
+vpc_config = {
   vpc_name = "vpc"
   vpc_cidr = "10.0.0.0/16"
   vpc_azs = ["us-east-1a","us-east-1b"]
