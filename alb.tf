@@ -9,5 +9,5 @@ module "web_alb" {
   security_groups    = [module.web_sg.security_group_id]
 
   tags = var.project_config.project_tags
-  env_name = var.environment.env_name
+  env_short = var.environment.env_short
 }
