@@ -13,14 +13,14 @@ variable "project_config" {
     description = "Custom project configs"
 
     type = object ({
-      tags = map(string)
+      project_tags = map(string)
     }) 
     
     default = {
-       project_tags = {
-         Environment  = "development",
-         createdBy    = "crodcarocl",
-         projectName  = "crodcaro-testing"
+      project_tags = {
+        Environment  = "development",
+        createdBy    = "crodcarocl",
+        projectName  = "crodcaro-testing"
        }
     }
 }
