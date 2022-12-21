@@ -30,6 +30,8 @@ variable "project_config" {
     }
 }
 
+# VPC Config
+
 variable "vpc_config" {
   description = "VPC Config variables"
 
@@ -40,4 +42,15 @@ variable "vpc_config" {
     vpc_private_subnets = list(string)
     vpc_public_subnets  = list(string)
   })
+}
+
+# ALB Config
+
+variable "alb_config" {
+    description = "ALB Config variables"
+
+    type = object ({
+      alb_name = string
+      load_balancer_type = string
+    })
 }

@@ -18,3 +18,10 @@ project_config = {
     projectName  = "crodcaro-testing"
   }
 }
+
+# ALB variables
+
+alb_config = {
+    alb_name = "web-loabalancer"
+    load_balancer_type = "application"
+}
