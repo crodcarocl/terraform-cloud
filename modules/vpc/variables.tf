@@ -1,38 +1,34 @@
-variable "instance_type" {
-  description = "Type of EC2 instance to provision"
-  default     = "t3.nano"
-}
-
-variable "project_config" {
+variable "tags" {
     description = "Custom project configs"
-
-    type = object ({
-      tags = map(string)
-      nat_gateway_tags = map(string)
-    }) 
-    
-    default = {
-       tags = {
-         Environment  = "development",
-         createdBy    = "crodcarocl",
-         projectName  = "crodcaro-testing"
-       }
-       nat_gateway_tags = {
-         Environment  = "development",
-         createdBy    = "crodcarocl",
-         projectName  = "crodcaro-testing"
-       }
-    }
+    type = map(string)
 }
 
-variable "vpc_config" {
-  description = "VPC Config variables"
+variable "nat_gateway_tags" {
+    description = "Custom project configs"
+    type = map(string)
+}
 
-  type = object ({
-    name            = string
-    cidr            = string
-    azs             = list(string)
-    private_subnets = list(string)
-    public_subnets  = list(string)
-  })
+variable "name" {
+  description = "VPC project name"
+  type = string
+}
+
+variable "cidr" {
+  description = "VPC cidr address"
+  type = string
+}
+
+variable "azs" {
+  description = "VPC availability zones"
+  type = list(string)
+}
+
+variable "private_subnets" {
+  description = "VPC private subnets"
+  type = list(string)
+}
+
+variable "public_subnets" {
+  description = "VPC private subnets"
+  type = list(string)
 }
