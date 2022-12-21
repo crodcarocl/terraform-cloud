@@ -23,3 +23,4 @@ module "vpc" {
 
   nat_gateway_tags = var.project_config.tags
   tags = var.project_config.tags
+}
