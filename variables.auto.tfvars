@@ -14,7 +14,6 @@ environment = {
 project_config = {
   project_tags = {
     Environment  = "development",
-    creationDate = timestamp(),
     createdBy    = "crodcarocl"
     projectName  = "crodcaro-testing"
   }
