@@ -7,7 +7,7 @@ module "alb" {
 
   vpc_id             = var.vpc_id
   subnets            = var.subnets
-  security_groups    = var.security_groupsss
+  security_groups    = var.security_groups
 
   target_groups = [
     {
