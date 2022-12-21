@@ -1,32 +1,13 @@
-resource "aws_eip" "nat" {
-  count = 1
-  vpc = true
-}
-
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source = "modules/vpc"
 
-  name = "development-vpc"
-  cidr = "10.0.0.0/16"
+  name = var.vpc_configs.vpc_name
+  cidr = var.vpc_configs.vpc_cidr
 
-  azs             = ["us-east-1a","us-east-1b"]
-  private_subnets = ["10.0.1.0/24"]
-  public_subnets  = ["10.0.2.0/24","10.0.4.0/24"]
+  azs             = var.vpc_config.vpc_azs
+  private_subnets = var.vpc_config.vpc_private_subnets
+  public_subnets  = var.vpc_config.vpc_public_subnets
 
-  enable_nat_gateway = true
-  single_nat_gateway = true
-  one_nat_gateway_per_az = false
-
-  reuse_nat_ips       = true                    # <= Skip creation of EIPs for the NAT Gateways
-  external_nat_ip_ids = "${aws_eip.nat.*.id}"   # <= IPs specified here as input to the module
-
-  nat_gateway_tags = {
-    Terraform = "true"
-    Environment = "development"
-  }
-
-  tags = {
-    Terraform = "true"
-    Environment = "development"
-  }
+  nat_gateway_tags = var.project_configs.project_tags
+  tags = var.project_configs.project_tags
 }
