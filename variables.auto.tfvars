@@ -8,8 +8,8 @@ vpc_public_subnets = ["10.1.0.0/24","10.3.0.0/24"]
 env_name = "development"
 
 project_tags = {
-    Environment  = "development"
-    creationDate = timestamp()
-    createdBy    = crodcarocl
-    projectName  = crodcaro-testing
+    Environment  = "development",
+    creationDate = timestamp(),
+    createdBy    = "crodcarocl"
+    projectName  = "crodcaro-testing"
 }
