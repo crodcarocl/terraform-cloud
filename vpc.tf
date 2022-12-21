@@ -1,4 +1,4 @@
-module "vpc" {
+module "vpc_config" {
   source = "./modules/vpc"
 
   name = var.vpc_config.vpc_name
