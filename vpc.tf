@@ -9,5 +9,5 @@ module "vpc" {
   public_subnets  = var.vpc_config.vpc_public_subnets
 
   nat_gateway_tags = var.project_config.project_tags
-  tags = var.project_config.project_tags
+  tags             = var.project_config.project_tags
 }

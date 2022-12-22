@@ -8,6 +8,6 @@ module "web_alb" {
   subnets            = module.vpc.public_subnets
   security_groups    = [module.web_sg.security_group_id]
 
-  tags = var.project_config.project_tags
+  tags      = var.project_config.project_tags
   env_short = var.environment.env_short
 }
