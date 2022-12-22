@@ -5,7 +5,7 @@ module "autoscaling" {
   min_size = var.asg_config.min_size
   max_size = var.asg_config.max_size
 
-  vpc_zone_identifier = module.vpc.public_subnets
+  vpc_zone_identifier = module.vpc.private_subnets
   target_group_arns   = module.web_alb.target_group_arns
   security_groups     = [module.web_sg.security_group_id]
 
