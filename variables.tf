@@ -80,7 +80,6 @@ variable "sg_config" {
 
   type = object ({
     sg_name             = string
-    sg_vpc_id           = string
     ingress_rules       = list(string)
     ingress_cidr_blocks = list(string)
     egress_rules        = list(string)
