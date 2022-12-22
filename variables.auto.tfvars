@@ -26,3 +26,12 @@ alb_config = {
     alb_name = "web-loabalancer"
     load_balancer_type = "application"
 }
+
+# ASG variables
+
+asg_config = {
+    asg_name = "web-asg"
+    min_size = 1
+    max_size = 1
+    instance_type = "t3.nano"
+}

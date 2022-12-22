@@ -1,3 +1,5 @@
+# General
+
 variable "instance_type" {
   description = "Type of EC2 instance to provision"
   default     = "t3.nano"
@@ -54,5 +56,18 @@ variable "alb_config" {
     type = object ({
       alb_name = string
       load_balancer_type = string
+    })
+}
+
+# Autoscaling
+
+variable "asg_config" {
+    description = "ASG config variables"
+
+    type = object ({
+        asg_name = string
+        min_size = number
+        max_size = number
+        instance_type = string
     })
 }

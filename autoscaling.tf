@@ -1,16 +1,14 @@
 module "autoscaling" {
-  source  = "terraform-aws-modules/autoscaling/aws"
-  version = "6.7.0"
-  # insert the 1 required variable here
+  source  = "./modules/asg"
 
-  name = "web"
-  min_size = 1
-  max_size = 2
+  name = var.asg_config.asg_name
+  min_size = var.asg_config.min_size
+  max_size = var.asg_config.max_size
 
   vpc_zone_identifier = module.vpc.public_subnets
   target_group_arns = module.web_alb.target_group_arns
   security_groups = [module.web_sg.security_group_id]
 
   image_id           = data.aws_ami.app_ami.id
-  instance_type = var.instance_type
+  instance_type = var.asg_config.instance_type
 }

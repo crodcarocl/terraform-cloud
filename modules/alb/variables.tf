@@ -19,7 +19,7 @@ variable "name" {
 }
 
 variable "env_short" {
-    description = "Environment Name"
+    description = "Environment short name"
     type = string
 }
 
