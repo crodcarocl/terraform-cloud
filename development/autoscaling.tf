@@ -1,5 +1,5 @@
 module "autoscaling" {
-  source  = "./modules/asg"
+  source  = "../modules/asg"
 
   name     = var.asg_config.asg_name
   min_size = var.asg_config.min_size
