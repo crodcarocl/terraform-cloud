@@ -11,14 +11,14 @@ module "ecs-fargate-task-definition" {
   version = "1.0.30"
   # insert the 1 required variable here
 
-  name_prefix     = "fargate-apache-task"
+  name_prefix     = "fargate-tomcat-task"
 
-  container_name  = "fargate-apache-container"
+  container_name  = "fargate-tomcat-container"
   container_image = "https://registry.hub.docker.com/_/tomcat"
 
   container_memory = 1024
   container_memory_reservation = 1024
-  container_cpu = 1
+  container_cpu = 10
 
   port_mappings = [
     {
