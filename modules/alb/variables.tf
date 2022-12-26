@@ -32,3 +32,13 @@ variable "tags" {
     description = "Custom Project Tags"
     type = map(string)
 }
+
+variable "port" {
+    description = "Load balancer listener port"
+    type = number
+}
+
+variable "backend_port" {
+    description = "Target group instances listener port"
+    type = number
+}

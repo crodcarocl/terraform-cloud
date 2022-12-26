@@ -1,20 +1,20 @@
 # VPC Variables
 vpc_config = {
-  vpc_name            = "quality-vpc"
-  vpc_cidr            = "172.0.0.0/16"
+  vpc_name            = "development-vpc"
+  vpc_cidr            = "10.0.0.0/16"
   vpc_azs             = ["us-east-1a","us-east-1b"]
-  vpc_private_subnets = ["172.0.1.0/24","172.0.3.0/24"]
-  vpc_public_subnets  = ["172.0.2.0/24","172.0.4.0/24"]
+  vpc_private_subnets = ["10.0.1.0/24","10.0.3.0/24"]
+  vpc_public_subnets  = ["10.0.2.0/24","10.0.4.0/24"]
 }
 
 environment = {
-  env_name  = "quality"
-  env_short = "qa"
+  env_name  = "development"
+  env_short = "devel"
 }
 
 project_config = {
   project_tags = {
-    Environment  = "quality",
+    Environment  = "development",
     createdBy    = "crodcarocl"
     projectName  = "crodcaro-testing"
   }
@@ -23,25 +23,16 @@ project_config = {
 # ALB variables
 
 alb_config = {
-    alb_name            = "development-web-loabalancer"
+    alb_name            = "development-ecs-loabalancer"
     load_balancer_type  = "application"
     alb_listener_port   = 80
     alg_tagergroup_port = 80
 }
 
-# ASG variables
-
-asg_config = {
-    asg_name      = "qa-web-asg"
-    min_size      = 1
-    max_size      = 1
-    instance_type = "t3.nano"
-}
-
 # SG variables
 
 sg_config = {
-  sg_name             = "qa-web-sg"
+  sg_name             = "dev-ecs-sg"
   ingress_rules       = ["http-80-tcp", "https-443-tcp"]
   ingress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules        = ["all-all"]
