@@ -55,6 +55,4 @@ module "ecs-fargate-service" {
 
   assign_public_ip    = false
   security_groups     = [module.ecs_sg.security_group_id]
-
-  lb_http_tgs_arns    = module.ecs_alb.target_group_arns
 }
