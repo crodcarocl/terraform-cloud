@@ -62,19 +62,6 @@ variable "alb_config" {
   })
 }
 
-# Autoscaling
-
-variable "asg_config" {
-  description = "ASG config variables"
-
-  type = object ({
-    asg_name      = string
-    min_size      = number
-    max_size      = number
-    instance_type = string
-  })
-}
-
 # Security Group
 
 variable "sg_config" {
