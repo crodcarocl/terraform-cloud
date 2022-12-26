@@ -45,7 +45,6 @@ module "ecs-fargate-service" {
   ecs_cluster_arn     = module.ecs.cluster_arn
 
   name_prefix         = "test"
-  custom_lb_arn       = module.ecs_alb.lb_arn
 
   vpc_id              = module.vpc.vpc_id
   private_subnets     = module.vpc.private_subnets
@@ -55,4 +54,7 @@ module "ecs-fargate-service" {
 
   assign_public_ip    = false
   security_groups     = [module.ecs_sg.security_group_id]
+
+  custom_lb_arn       = module.ecs_alb.lb_arn
+  tags                = var.project_config.project_tags
 }
