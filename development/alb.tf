@@ -10,4 +10,7 @@ module "web_alb" {
 
   tags      = var.project_config.project_tags
   env_short = var.environment.env_short
+
+  port = var.alb_config.alb_listener_port
+  backend_port = var.alb_config.alb_tagergroup_port
 }
