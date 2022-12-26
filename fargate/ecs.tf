@@ -18,7 +18,7 @@ module "ecs-fargate-task-definition" {
 
   container_memory = 1024
   container_memory_reservation = 1024
-  container_cpu = 50
+  container_cpu = 256
 
   port_mappings = [
     {
