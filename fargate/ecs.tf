@@ -31,19 +31,25 @@ module "ecs-fargate-task-definition" {
   tags = var.project_config.project_tags
 }
 
-# module "ecs-fargate-service" {
-#   source  = "cn-terraform/ecs-fargate-service/aws"
-#   version = "2.0.37"
-#   # insert the 7 required variables here
+module "ecs-fargate-service" {
+  source  = "cn-terraform/ecs-fargate-service/aws"
+  version = "2.0.37"
+  # insert the 7 required variables here
 
-#   ecs_cluster_name    = module.ecs.cluster_name
-#   container_name      = "tomcat-service"
-#   ecs_cluster_arn     = module.ecs.cluster_arn
-#   name_prefix         = "test"
+  # for testing purposes
+  enable_s3_logs = false
+  #
 
-#   vpc_id              = module.vpc.vpc_id
-#   private_subnets     = module.vpc.private_subnets
-#   public_subnets      = module.vpc.public_subnets
+  ecs_cluster_name    = module.ecs.cluster_name
+  container_name      = "tomcat-service"
+  ecs_cluster_arn     = module.ecs.cluster_arn
 
-#   task_definition_arn = module.ecs-fargate-task-definition.aws_ecs_task_definition_td_arn
-# }
+  name_prefix         = "test"
+  custom_lb_arn       = module.ecs_alb.lb_arn
+
+  vpc_id              = module.vpc.vpc_id
+  private_subnets     = module.vpc.private_subnets
+  public_subnets      = module.vpc.public_subnets
+
+  task_definition_arn = module.ecs-fargate-task-definition.aws_ecs_task_definition_td_arn
+}
