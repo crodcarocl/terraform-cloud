@@ -14,6 +14,6 @@ output "ecs_cluster_name" {
     value = module.ecs.cluster_name
 }
 
-output "aws_ecs_task_definition_td_arn" {
-    value = module.ecs-fargate-task-definition.aws_ecs_task_definition_td_arn
-}
+# output "aws_ecs_task_definition_td_arn" {
+#     value = module.ecs-fargate-task-definition.aws_ecs_task_definition_td_arn
+# }
