@@ -6,15 +6,29 @@ module "ecs" {
   tags = var.project_config.project_tags
 }
 
-# module "ecs-fargate-task-definition" {
-#   source  = "cn-terraform/ecs-fargate-task-definition/aws"
-#   version = "1.0.30"
-#   # insert the 1 required variable here
+module "ecs-fargate-task-definition" {
+  source  = "cn-terraform/ecs-fargate-task-definition/aws"
+  version = "1.0.30"
+  # insert the 1 required variable here
 
-#   name_prefix    = "task"
-#   container_name = "apache-test"
-#   container_image = 
-# }
+  name_prefix     = "fargate-apache-task"
+
+  container_name  = "fargate-apache-container"
+  container_image = "https://registry.hub.docker.com/_/tomcat"
+
+  container_memory = 1024
+  container_cpu = 0.5
+
+  port_mappings = [
+    {
+      containerPort = 80
+      hostPort      = 80
+      protocol      = "tcp"
+    }
+  ]
+
+  tags = var.project_config.project_tags
+}
 
 # module "ecs-fargate-service" {
 #   source  = "cn-terraform/ecs-fargate-service/aws"
