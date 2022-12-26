@@ -17,7 +17,7 @@ module "ecs-fargate-task-definition" {
   container_image = "https://registry.hub.docker.com/_/tomcat"
 
   container_memory = 1024
-  container_cpu = 0.5
+  container_cpu = 1
 
   port_mappings = [
     {
