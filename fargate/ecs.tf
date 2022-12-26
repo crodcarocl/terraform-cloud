@@ -29,6 +29,7 @@ module "ecs-fargate-service" {
   version = "2.0.37"
   # insert the 7 required variables here
 
+  ecs_cluster_name    = module.ecs.cluster_name
   container_name      = "tomcat-service"
   ecs_cluster_arn     = module.ecs.cluster_arn
   name_prefix         = "test"
