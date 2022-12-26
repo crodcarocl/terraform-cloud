@@ -34,6 +34,7 @@ module "ecs-fargate-task-definition" {
 module "ecs-fargate-service" {
   source  = "cn-terraform/ecs-fargate-service/aws"
   version = "2.0.37"
+  depends_on = [module.ecs_alb]
   # insert the 7 required variables here
 
   # for testing purposes
