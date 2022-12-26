@@ -3,7 +3,6 @@ output "environment_url" {
 }
 
 output "lb_arn" {
-  depends_on = [module.ecs_alb]
   value = module.ecs_alb.lb_arn
 }
 

@@ -38,6 +38,10 @@ module "ecs-fargate-service" {
 
   # for testing purposes
   enable_s3_logs = false
+  depends_on     = [
+    module.ecs_alb,
+    module.ecs-fargate-task-definition
+  ]
   #
 
   ecs_cluster_name    = module.ecs.cluster_name
@@ -56,7 +60,6 @@ module "ecs-fargate-service" {
   security_groups     = [module.ecs_sg.security_group_id]
 
   custom_lb_arn       = module.ecs_alb.lb_arn
-  depends_on          = [module.ecs_alb]
 
   tags                = var.project_config.project_tags
 }
