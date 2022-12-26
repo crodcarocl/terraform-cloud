@@ -34,6 +34,8 @@ module "ecs-fargate-task-definition" {
 module "ecs-fargate-service" {
   source  = "cn-terraform/ecs-fargate-service/aws"
   version = "2.0.37"
+
+  alb_arn    = module.ecs_alb.lb_arn
   depends_on = [module.ecs_alb]
   # insert the 7 required variables here
 
@@ -56,6 +58,6 @@ module "ecs-fargate-service" {
   assign_public_ip    = false
   security_groups     = [module.ecs_sg.security_group_id]
 
-  custom_lb_arn       = module.ecs_alb.lb_arn
+  custom_lb_arn       = module.ecs-fargate-service.alb_arn
   tags                = var.project_config.project_tags
 }
