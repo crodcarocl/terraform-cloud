@@ -52,4 +52,9 @@ module "ecs-fargate-service" {
   public_subnets      = module.vpc.public_subnets
 
   task_definition_arn = module.ecs-fargate-task-definition.aws_ecs_task_definition_td_arn
+
+  assign_public_ip    = false
+  security_groups     = [module.ecs_sg.security_group_id]
+
+  lb_http_tgs_arns    = module.ecs_alb.target_group_arns
 }
