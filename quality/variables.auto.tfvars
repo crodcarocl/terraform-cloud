@@ -26,7 +26,7 @@ alb_config = {
     alb_name            = "development-web-loabalancer"
     load_balancer_type  = "application"
     alb_listener_port   = 80
-    alg_tagergroup_port = 80
+    alb_tagergroup_port = 80
 }
 
 # ASG variables
