@@ -31,9 +31,9 @@ module "ecs-fargate-task-definition" {
   tags = var.project_config.project_tags
 }
 
-module "ecs-fargate" {
-  source  = "cn-terraform/ecs-fargate/aws"
-  version = "2.0.49"
+module "ecs-fargate-service" {
+  source  = "cn-terraform/ecs-fargate-service/aws"
+  version = "2.0.37"
   # insert the 7 required variables here
 
   # for testing purposes
