@@ -15,7 +15,7 @@ module "ecs-fargate" {
   container_memory             = 1024
   container_memory_reservation = 1024
   container_cpu                = 256
-  port_mappings                = [{ "containerPort": 80, "hostPort": 80, "protocol": "tcp" }]
+  port_mappings                = [{ "containerPort": 80, "hostPort": 80, "containerPort": 443, "hostPort": 443, "protocol": "tcp" }]
   desired_count                = 1
 
   # VPC Settings
@@ -31,8 +31,8 @@ module "ecs-fargate" {
   lb_enable_http2              = true
   lb_http_ingress_cidr_blocks  = var.sg_config.ingress_cidr_blocks
   lb_http_ports                = { "default_http": {"listener_port": 80, "target_group_port": 80}}
-  #lb_https_ingress_cidr_blocks = var.sg_config.ingress_cidr_blocks
-  #lb_https_ports               = {"default_http": {"listener_port": 443, "target_group_port": 443}}
+  lb_https_ingress_cidr_blocks = var.sg_config.ingress_cidr_blocks
+  lb_https_ports               = {"default_http": {"listener_port": 443, "target_group_port": 443}}
   lb_security_groups           = [module.ecs_sg.security_group_id]
 
   # General Settings
