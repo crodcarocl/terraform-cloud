@@ -48,3 +48,17 @@ variable "vpc_config" {
     vpc_public_subnets  = list(string)
   })
 }
+
+# Security Group
+
+variable "sg_config" {
+  description = "SG config variables"
+
+  type = object ({
+    sg_name             = string
+    ingress_rules       = list(string)
+    ingress_cidr_blocks = list(string)
+    egress_rules        = list(string)
+    egress_cidr_blocks  = list(string)
+  })
+}
