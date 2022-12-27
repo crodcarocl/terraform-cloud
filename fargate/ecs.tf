@@ -7,7 +7,7 @@ module "ecs-fargate" {
   enable_s3_logs = false
   #
 
-  name_prefix = "fargate-"
+  name_prefix = "fargate"
 
   # Container Settings
   container_image              = "tomcat"
