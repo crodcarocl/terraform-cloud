@@ -64,9 +64,11 @@ module "ecs-fargate-service" {
   lb_enable_http2     = true
   lb_http_ports       = [
     {
-      listener_port = 80
-      target_group_port      = 80
-      type      = "forward"
+      "default_http": {
+        "listener_port" = 80
+        "target_group_port"      = 80
+        "type"      = "forward"
+      }
     }
   ]
 
