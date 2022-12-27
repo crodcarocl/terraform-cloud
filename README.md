@@ -1,3 +1,6 @@
+[![](https://img.shields.io/github/last-commit/crodcarocl/terraform-cloud)](https://github.com/crodcarocl/terraform-cloud)
+[![](https://img.shields.io/github/repo-size/crodcarocl/terraform-cloud)](https://github.com/crodcarocl/terraform-cloud)
+
 ## Status
 
 Work in progress
