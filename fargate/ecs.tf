@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "fargate-cluster-td" {
   container_definitions    = jsonencode([
     {
       name      = "tomcat-container"
-      image     = "tomcat"
+      image     = "https://registry.hub.docker.com/_/tomcat"
       cpu       = 512
       memory    = 1024
       essential = true
