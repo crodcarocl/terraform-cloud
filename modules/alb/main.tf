@@ -19,7 +19,7 @@ module "alb" {
   ]
 
   http_tcp_listeners = [
-    {v
+    {
       port               = var.port
       protocol           = "HTTP"
       target_group_index = 0
