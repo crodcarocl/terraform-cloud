@@ -42,3 +42,8 @@ variable "backend_port" {
     description = "Target group instances listener port"
     type = number
 }
+
+variable "target_type" {
+    description = "Target type for listener"
+    type = string
+}

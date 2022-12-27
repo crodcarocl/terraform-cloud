@@ -73,5 +73,6 @@ variable "alb_config" {
     load_balancer_type  = string
     alb_listener_port   = number
     alb_tagergroup_port = number
+    alb_target_type     = string
   })
 }

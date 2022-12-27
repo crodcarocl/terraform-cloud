@@ -14,12 +14,12 @@ module "alb" {
       name_prefix      = "${var.env_short}-"
       backend_protocol = "HTTP"
       backend_port     = var.backend_port
-      target_type      = "instance"
+      target_type      = var.target_type
     }
   ]
 
   http_tcp_listeners = [
-    {
+    {v
       port               = var.port
       protocol           = "HTTP"
       target_group_index = 0
