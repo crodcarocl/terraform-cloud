@@ -48,3 +48,30 @@ variable "vpc_config" {
     vpc_public_subnets  = list(string)
   })
 }
+
+# ALB Config
+
+variable "alb_config" {
+  description = "ALB Config variables"
+
+  type = object ({
+    alb_name            = string
+    load_balancer_type  = string
+    alb_listener_port   = number
+    alb_tagergroup_port = number
+  })
+}
+
+# Security Group
+
+variable "sg_config" {
+  description = "SG config variables"
+
+  type = object ({
+    sg_name             = string
+    ingress_rules       = list(string)
+    ingress_cidr_blocks = list(string)
+    egress_rules        = list(string)
+    egress_cidr_blocks  = list(string)
+  })
+}
