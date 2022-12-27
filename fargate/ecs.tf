@@ -60,6 +60,17 @@ module "ecs-fargate-service" {
   security_groups     = [module.ecs_sg.security_group_id]
 
   custom_lb_arn       = module.ecs_alb.lb_arn
+  lb_security_groups  = [module.ecs_sg.security_group_id]
+  lb_enable_http2     = true
+  lb_http_ports       = [
+    {
+      "default_http": {
+        listener_port = 80
+        target_group_port      = 80
+        type      = "forward"
+      }
+    }
+  ]
 
   tags                = var.project_config.project_tags
 }
