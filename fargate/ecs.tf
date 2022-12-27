@@ -28,12 +28,12 @@ module "ecs-fargate" {
   ecs_service_security_groups = [module.ecs_sg.security_group_id]
 
   # ALB Settings
-  lb_enable_http2 = true
-  lb_http_ingress_cidr_blocks = var.sg_config.ingress_cidr_blocks
-  lb_http_ports  = { "default_http": {"listener_port": 80, "target_group_port": 80}}
-  lb_https_ingress_cidr_blocks = var.sg_config.ingress_cidr_blocks
-  lb_https_ports = {"default_http": {"listener_port": 443, "target_group_port": 443}}
-  lb_security_groups  = [module.ecs_sg.security_group_id]
+  lb_enable_http2              = true
+  lb_http_ingress_cidr_blocks  = var.sg_config.ingress_cidr_blocks
+  lb_http_ports                = { "default_http": {"listener_port": 80, "target_group_port": 80}}
+  #lb_https_ingress_cidr_blocks = var.sg_config.ingress_cidr_blocks
+  #lb_https_ports               = {"default_http": {"listener_port": 443, "target_group_port": 443}}
+  lb_security_groups           = [module.ecs_sg.security_group_id]
 
   # General Settings
   tags = var.project_config.project_tags

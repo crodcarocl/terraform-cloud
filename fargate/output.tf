@@ -20,7 +20,6 @@ output "public_subnets" {
 }
 
 # ECS Outputs
-
 output "aws_ecs_cluster_cluster_name" {
     description = "ECS Cluster name"
     value = module.ecs-fargate.aws_ecs_cluster_cluster_name
