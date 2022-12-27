@@ -31,3 +31,12 @@ sg_config = {
   egress_rules        = ["all-all"]
   egress_cidr_blocks  = ["0.0.0.0/0"]
 }
+
+# ALB variables
+
+alb_config = {
+    alb_name            = "development-ecs-loabalancer"
+    load_balancer_type  = "application"
+    alb_listener_port   = 80
+    alb_tagergroup_port = 80
+}

@@ -62,3 +62,16 @@ variable "sg_config" {
     egress_cidr_blocks  = list(string)
   })
 }
+
+# ALB Config
+
+variable "alb_config" {
+  description = "ALB Config variables"
+
+  type = object ({
+    alb_name            = string
+    load_balancer_type  = string
+    alb_listener_port   = number
+    alb_tagergroup_port = number
+  })
+}
