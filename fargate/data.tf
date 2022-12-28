@@ -1,6 +1,3 @@
 data "aws_lb_target_group" "ecs_tg" {
-    filter {
-        name  = target_type
-        value = "ip"
-    }
+    arn  = module.ecs_alb.target_group_arns[0]
 }
