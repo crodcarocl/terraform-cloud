@@ -18,3 +18,10 @@ output "public_subnets" {
     description = "VPC public subnets"
     value = module.vpc.public_subnets
 }
+
+# Data Outputs
+
+output "ecs_tg" {
+    description = "Target group type IP"
+    value = data.ecs_alb.ecs_tg.arn
+}
