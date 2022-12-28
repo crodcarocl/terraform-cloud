@@ -52,7 +52,7 @@ resource "aws_ecs_service" "tomcat" {
   load_balancer {
     target_group_arn = module.ecs_alb.target_group_arns[0]
     container_name   = "tomcat-container"
-    container_port   = 80
+    container_port   = 8080
   }
 
   network_configuration {
