@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "fargate-cluster-td" {
   container_definitions    = jsonencode([
     {
       name      = "tomcat-container"
-      image     = "tomcat"
+      image     = "tomcat@sha256:4eee4e0f7617148b2fefb1161f98e8e7c542a529ef3083c9e869850f5bbfdd48"
       cpu       = 512
       memory    = 1024
       essential = true
