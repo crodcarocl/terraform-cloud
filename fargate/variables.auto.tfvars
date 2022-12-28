@@ -38,6 +38,6 @@ alb_config = {
     alb_name            = "development-ecs-loabalancer"
     load_balancer_type  = "application"
     alb_listener_port   = 80
-    alb_tagergroup_port = 8080
+    alb_tagergroup_port = 80
     alb_target_type     = "ip"
 }

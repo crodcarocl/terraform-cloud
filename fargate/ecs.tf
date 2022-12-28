@@ -18,29 +18,29 @@ resource "aws_ecs_cluster" "fargate-cluster" {
 
 resource "aws_ecs_task_definition" "fargate-cluster-td" {
   
-  family                   = "fargate-tomcat-task"
+  family                   = "fargate-nginx-task"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = 512
   memory                   = 1024
   container_definitions    = jsonencode([
     {
-      name      = "tomcat-container"
-      image     = "tomcat@sha256:4eee4e0f7617148b2fefb1161f98e8e7c542a529ef3083c9e869850f5bbfdd48"
+      name      = "nginx-container"
+      image     = "nginx:latest"
       cpu       = 512
       memory    = 1024
       essential = true
       portMappings = [
         {
-          containerPort = 8080
-          hostPort      = 8080
+          containerPort = 80
+          hostPort      = 80
         }
       ]
     }])
 }
 
 resource "aws_ecs_service" "tomcat" {
-  name            = "tomcat-service"
+  name            = "nginx-service"
   cluster         = aws_ecs_cluster.fargate-cluster.name
   task_definition = aws_ecs_task_definition.fargate-cluster-td.arn
   desired_count   = 1
@@ -51,8 +51,8 @@ resource "aws_ecs_service" "tomcat" {
 
   load_balancer {
     target_group_arn = module.ecs_alb.target_group_arns[0]
-    container_name   = "tomcat-container"
-    container_port   = 8080
+    container_name   = "nginx-container"
+    container_port   = 80
   }
 
   network_configuration {
