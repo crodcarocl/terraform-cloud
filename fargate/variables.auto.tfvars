@@ -26,7 +26,7 @@ project_config = {
 
 sg_config = {
   sg_name             = "dev-ecs-sg"
-  ingress_rules       = ["http-80-tcp", "https-443-tcp"]
+  ingress_rules       = ["http-80-tcp","http-8080-tcp", "https-443-tcp"]
   ingress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules        = ["all-all"]
   egress_cidr_blocks  = ["0.0.0.0/0"]
@@ -38,6 +38,6 @@ alb_config = {
     alb_name            = "development-ecs-loabalancer"
     load_balancer_type  = "application"
     alb_listener_port   = 80
-    alb_tagergroup_port = 80
+    alb_tagergroup_port = 8080
     alb_target_type     = "ip"
 }
