@@ -23,5 +23,5 @@ output "public_subnets" {
 
 output "ecs_tg" {
     description = "Target group type IP"
-    value = data.ecs_alb.ecs_tg.arn
+    value = data.aws_lb_target_group.ecs_tg.arn
 }
