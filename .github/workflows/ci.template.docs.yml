@@ -1,3 +1,4 @@
+name: Generate terraform docs
 on:
   push:
     branches:
@@ -10,13 +11,13 @@ on:
 
 jobs:
   reusable_checkov_build:
-    name: Static Security Analysis By Checkov
+    name: Static Docs Analysis By Checkov
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: $main
+          ref: main
       # terraform-docs https://terraform-docs.io/how-to/github-action/
       - name: Render terraform docs and push changes back to PR
         uses: terraform-docs/gh-actions@main
