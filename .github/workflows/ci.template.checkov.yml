@@ -1,4 +1,12 @@
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  workflow_call:
+      inputs:
+        resources-directory: # e.g. src/ecs-fargate/genetics TODO
+          required: true
+          type: string
 
 jobs:
   checkov_analysis:
@@ -16,5 +24,5 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: development
+          directory: ${{inputs.resources-directory}}
           framework: terraform
