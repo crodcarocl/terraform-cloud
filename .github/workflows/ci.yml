@@ -1,4 +1,4 @@
-name: CI
+name: Terraform lambda
 
 on:
   pull_request:
@@ -13,11 +13,11 @@ on:
       - '*/**'
 
 jobs:
-  unkwon:
-    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
+  terraform-lint:
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
     with:
       resources-directory: development
-  tflint:
-    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
+  terraform-docs:
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
     with:
       resources-directory: development
