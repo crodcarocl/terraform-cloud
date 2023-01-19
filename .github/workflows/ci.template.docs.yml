@@ -1,6 +1,6 @@
 name: Generate terraform docs
 on:
-  push:
+  pull_request:
     branches:
       - main
   workflow_call:
@@ -10,14 +10,15 @@ on:
           type: string
 
 jobs:
-  reusable_checkov_build:
-    name: Static Docs Analysis By Checkov
+  terraform-docs:
+    name: Terraform documentation
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - name: Code Checkout
+        uses: actions/checkout@v3
         with:
-          ref: main
+          ref: ${{ github.event.pull_request.head.ref }}
       # terraform-docs https://terraform-docs.io/how-to/github-action/
       - name: Render terraform docs and push changes back to PR
         uses: terraform-docs/gh-actions@main
