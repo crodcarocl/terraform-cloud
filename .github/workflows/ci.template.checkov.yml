@@ -1,0 +1,20 @@
+on: [push]
+
+jobs:
+  checkov_analysis:
+    name: Static Security Analysis By Checkov
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v2
+      # checkov https://github.com/bridgecrewio/checkov#examples
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Test with Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ${{inputs.resources-directory}}
+          framework: terraform

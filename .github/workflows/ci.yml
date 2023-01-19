@@ -16,3 +16,5 @@ jobs:
   tflint:
     if: ${{ github.event_name == 'pull_request' }}
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
+    with:
+      resources-directory: development/ # TODO
