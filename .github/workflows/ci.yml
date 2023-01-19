@@ -18,6 +18,7 @@ jobs:
     with:
       resources-directory: development
   terraform-docs:
+    needs: terraform-lint
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
     with:
       resources-directory: development
