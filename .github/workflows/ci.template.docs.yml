@@ -1,0 +1,27 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_call:
+      inputs:
+        resources-directory: # e.g. src/ecs-fargate/genetics TODO
+          required: true
+          type: string
+
+jobs:
+  reusable_checkov_build:
+    name: Static Security Analysis By Checkov
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: $main
+      # terraform-docs https://terraform-docs.io/how-to/github-action/
+      - name: Render terraform docs and push changes back to PR
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: .
+          output-file: ${{inputs.resources-directory}}/README.md # per module
+          output-method: inject
+          git-push: "true"
