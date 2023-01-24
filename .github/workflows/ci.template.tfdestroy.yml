@@ -5,7 +5,7 @@ on:
     paths:
       - '*/**'
   pull_request:
-    branches: [ main ]
+    branches: [ asdf ]
 
 defaults:
   run:
@@ -30,7 +30,7 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v2
       - name: Terraform Setup
-      - uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v1
         with:
           terraform_wrapper: false
       - name: Terraform destroy

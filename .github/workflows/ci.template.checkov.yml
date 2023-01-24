@@ -2,7 +2,7 @@ name: Terraform Static Security Analysis
 on:
   pull_request:
     branches:
-      - main
+      - asdf
   workflow_call:
       inputs:
         resources-directory: # e.g. src/ecs-fargate/genetics TODO
