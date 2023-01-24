@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v2
+      - name: Code Checkout
+        uses: actions/checkout@v2
       # checkov https://github.com/bridgecrewio/checkov#examples
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
