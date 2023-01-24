@@ -13,4 +13,5 @@ module "web_alb" {
 
   port = var.alb_config.alb_listener_port
   backend_port = var.alb_config.alb_tagergroup_port
+  target_type  = var.alb_config.alb_target_type
 }
