@@ -15,8 +15,6 @@ jobs:
   terraform-init:
     needs: terraform-lint
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.tfinit.yml@main
-    with:
-      resources-directory: development
   terraform-docs:
     needs: terraform-init
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
