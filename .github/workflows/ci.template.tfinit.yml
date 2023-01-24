@@ -1,4 +1,4 @@
-name: "Terraform Deployment"
+name: "Terraform Init"
 on:
   workflow_call:
   push:
@@ -30,7 +30,7 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v2
       - name: Terraform Setup
-      - uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v1
         with:
           terraform_wrapper: false
       - name: Terraform Init
