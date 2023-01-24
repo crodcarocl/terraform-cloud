@@ -7,6 +7,10 @@ on:
   pull_request:
     branches: [ asdf ]
 
+permissions:
+  id-token: write
+  contents: read
+
 defaults:
   run:
     shell: bash
@@ -35,6 +39,12 @@ jobs:
           terraform_wrapper: false
       - name: Terraform Format
         run: echo "Soon! :D" #terraform fmt -check
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::374632989470:role/GithubRole
+          role-session-name: TerraformSession
+          aws-region: us-east-1
       - name: Terraform Init
         id: init
         run: |
