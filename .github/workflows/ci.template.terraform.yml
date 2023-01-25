@@ -24,7 +24,7 @@ jobs:
       max-parallel: 1
       matrix:
          include:
-           - environment: development
+           - environment: ${{inputs.environment}}
              runner: ubuntu-latest
              aimarn: arn:aws:iam::374632989470:role/GithubRole
            - environment: quality
