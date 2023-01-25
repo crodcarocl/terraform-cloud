@@ -4,10 +4,10 @@ on:
   pull_request:
     branches:
   workflow_call:
-      inputs:
-        resources-directory:
-          required: true
-          type: string
+    inputs:
+      resources-directory:
+        required: true
+        type: string
 
 jobs:
   terraform-docs:

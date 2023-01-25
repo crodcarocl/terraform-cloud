@@ -6,7 +6,7 @@ on:
   workflow_call:
     inputs:
       resources-directory:
-        default: '.'
+        default: "."
         description: 'Directory with infrastructure code and/or package manager files to scan'
         required: true
         type: string
