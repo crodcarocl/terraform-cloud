@@ -3,7 +3,7 @@ name: "Terraform Pipeline"
 on:
   push:
     branches:
-      - main
+      - asdfd
   workflow_call:
   pull_request:
 
