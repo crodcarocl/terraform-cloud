@@ -4,11 +4,12 @@ on:
   push:
     branches:
   workflow_call:
-      inputs:
-        resources-directory:
-          default: '.'
-          required: true
-          type: string
+    inputs:
+      resources-directory:
+        default: '.'
+        description: 'Directory with infrastructure code and/or package manager files to scan'
+        required: true
+        type: string
 
 jobs:
   checkov_analysis:
@@ -28,6 +29,5 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: '.'
-          #directory: ${{inputs.resources-directory}}
+          directory: ${{inputs.resources-directory}}
           framework: terraform
