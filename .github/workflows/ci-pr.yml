@@ -7,10 +7,10 @@ on:
 
 jobs:
   terraform-pipeline:
-    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.terraform.yml@main
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.terraform.yml@ft/testing
 
   terraform-docs:
     needs: terraform-pipeline
-    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@ft/testing
     with:
       resources-directory: "."
