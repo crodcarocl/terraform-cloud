@@ -9,6 +9,7 @@ on:
 
 jobs:
   terraform-lint:
+    if: github.ref == 'refs/heads/ft/**' && github.event_name == 'push'
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
     with:
       resources-directory: development

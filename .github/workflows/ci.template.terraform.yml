@@ -17,9 +17,17 @@ defaults:
 
 jobs:
   terraform:
-    name: "Terraform Pipeline"
-    runs-on: ubuntu-latest
+    name: "Terrfaorm running on: ${{matrix.runner}} - for env: ${{ matrix.environment }}"
+    runs-on: [ '${{ matrix.runner }}']
     timeout-minutes: 15
+    strategy:
+      max-parallel: 1
+      matrix:
+         include:
+           - environment: development
+             runner: ubuntu-latest
+           - environment: quality
+             runner: ubuntu-18.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,7 +39,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: terraform init -backend-config=${{ matrix.environment }}/backend.tfvars -upgrade=true -no-color -input=false
       
       - name: Terraform Validate
         id: validate
@@ -47,7 +55,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false
+        run: terraform plan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
         continue-on-error: true
 
       - uses: actions/github-script@v6
@@ -79,4 +87,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false -var-file=${{ matrix.environment }}/terraform.tfvars
