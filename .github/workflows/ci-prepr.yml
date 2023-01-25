@@ -1,0 +1,13 @@
+name: Terraform lambda
+
+on:
+  push:
+    branches:
+      - '!main'
+      - '!master'
+
+jobs:
+  terraform-lint:
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
+    with:
+      resources-directory: "."

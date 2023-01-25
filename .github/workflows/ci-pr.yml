@@ -1,14 +1,20 @@
 name: Terraform lambda
 
 on:
-  push:
+  pull_request:
     branches:
-      - '!main'
-      - '!master'
+      - main
 
 jobs:
-  terraform-lint:
-    if: github.event_name == 'push'
-    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
+  terraform-pipeline:
+    if: success() && github.ref == 'refs/heads/main'
+    needs: terraform-lint
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.terraform.yml@main
+    with:
+      environment: development
+  terraform-docs:
+    if: success() && github.ref == 'refs/heads/main'
+    needs: terraform-pipeline
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
     with:
       resources-directory: "."
