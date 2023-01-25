@@ -8,6 +8,6 @@ on:
 
 jobs:
   terraform-lint:
-    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@ft/testing
     with:
       resources-directory: "."
