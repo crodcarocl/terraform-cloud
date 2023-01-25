@@ -1,8 +1,6 @@
 name: Terraform SSA
 
 on:
-  push:
-    branches:
   workflow_call:
     inputs:
       resources-directory:
