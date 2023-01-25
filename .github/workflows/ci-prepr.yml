@@ -1,10 +1,6 @@
 name: Terraform lambda
 
-on:
-  push:
-    branches:
-      - '!main'
-      - '!master'
+on: [push]
 
 jobs:
   terraform-lint:
