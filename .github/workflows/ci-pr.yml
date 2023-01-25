@@ -8,8 +8,7 @@ on:
 jobs:
   terraform-pipeline:
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.terraform.yml@main
-    with:
-      environment: development
+
   terraform-docs:
     needs: terraform-pipeline
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
