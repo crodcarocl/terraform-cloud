@@ -1,8 +1,8 @@
 name: Generate terraform docs
+
 on:
   pull_request:
     branches:
-      - asdf
   workflow_call:
       inputs:
         resources-directory:

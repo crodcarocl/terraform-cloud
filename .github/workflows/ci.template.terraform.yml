@@ -1,11 +1,13 @@
 name: "Terraform Pipeline"
 
 on:
-  push:
-    branches:
-      - asdfd
-  workflow_call:
   pull_request:
+    branches:
+  workflow_call:
+      inputs:
+        environment:
+          required: true
+          type: string
 
 permissions:
   id-token: write
@@ -26,8 +28,10 @@ jobs:
          include:
            - environment: development
              runner: ubuntu-latest
+             aimarn: arn:aws:iam::374632989470:role/GithubRole
            - environment: quality
              runner: ubuntu-18.04
+             aimarn: TBD
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -48,7 +52,7 @@ jobs:
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::374632989470:role/GithubRole
+          role-to-assume: ${{ matrix.aimarn }}
           role-session-name: TerraformSession
           aws-region: us-east-1
 

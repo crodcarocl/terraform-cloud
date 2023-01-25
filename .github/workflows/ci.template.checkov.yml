@@ -1,8 +1,8 @@
-name: Terraform Static Security Analysis
+name: Terraform SSA
+
 on:
-  pull_request:
+  push:
     branches:
-      - asdf
   workflow_call:
       inputs:
         resources-directory:
