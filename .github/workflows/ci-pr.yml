@@ -1,4 +1,4 @@
-name: Terraform lambda
+name: Terraform Pipeline
 
 on:
   pull_request:
