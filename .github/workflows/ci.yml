@@ -16,7 +16,7 @@ jobs:
     needs: terraform-lint
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.terraform.yml@main
   terraform-docs:
-    needs: terraform-plan
+    needs: terraform-pipeline
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
     with:
       resources-directory: development
