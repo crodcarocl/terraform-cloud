@@ -1,6 +1,10 @@
-name: Terraform lambda
+name: Terraform Pre-pullrequest
 
-on: [push]
+on:
+  push:
+    - '*'
+    - '!main'
+    - '!master'
 
 jobs:
   terraform-lint:
