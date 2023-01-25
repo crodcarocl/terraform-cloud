@@ -5,7 +5,7 @@ on:
       - asdf
   workflow_call:
       inputs:
-        resources-directory: # e.g. src/ecs-fargate/genetics TODO
+        resources-directory:
           required: true
           type: string
 
@@ -20,6 +20,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       # terraform-docs https://terraform-docs.io/how-to/github-action/
+      
       - name: Render terraform docs and push changes back to PR
         uses: terraform-docs/gh-actions@main
         with:

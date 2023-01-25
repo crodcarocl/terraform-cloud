@@ -12,9 +12,9 @@ jobs:
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
     with:
       resources-directory: development
-  terraform-plan:
+  terraform-pipeline:
     needs: terraform-lint
-    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.tfplan.yml@main
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.terraform.yml@main
   terraform-docs:
     needs: terraform-plan
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main

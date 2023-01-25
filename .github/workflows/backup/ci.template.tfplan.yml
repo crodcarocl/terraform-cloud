@@ -18,6 +18,7 @@ jobs:
   terraform:
     name:   ${{matrix.runner}} - ${{ matrix.environment }}
     runs-on: [ '${{ matrix.runner }}']
+    timeout-minutes: 15
     strategy:
       max-parallel: 1
       matrix:
@@ -26,45 +27,39 @@ jobs:
              runner: ubuntu-latest
            - environment: quality
              runner: ubuntu-18.04
-    env:
-         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-         AWS_DEFAULT_REGION: us-east-1
     steps:
       - name: Code Checkout
         uses: actions/checkout@v2
+
       - name: Terraform Setup
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_wrapper: false
+
       - name: Terraform Format
         run: echo "Soon! :D" #terraform fmt -check
+
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::374632989470:role/GithubRole
           role-session-name: TerraformSession
           aws-region: us-east-1
+
       - name: Terraform Init
         id: init
         run: |
            rm -rf .terraform
            terraform init -backend-config=${{ matrix.environment }}/backend.tfvars -upgrade=true -no-color -input=false
+
       - name: Terraform Plan
         id: plan
         run: |
-          terraform plan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
-  comment:
-    runs-on: ubuntu-latest
-    needs: terraform
-    if: github.event_name == 'pull_request'
-    steps:
-      - uses: actions/github-script@v5
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
-            })
+          terraform plan -out=${GITHUB_SHA}.plan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
+
+      - name: 'Upload Terraform Plan'
+          uses: actions/upload-artifact@v3
+          with:
+            name: ${GITHUB_SHA}
+            path: ${GITHUB_SHA}.plan
+            retention-days: 5
