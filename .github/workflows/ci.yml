@@ -12,7 +12,7 @@ jobs:
     if: github.ref == 'refs/heads/ft/**' && github.event_name == 'push'
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@main
     with:
-      resources-directory: ./
+      resources-directory: "."
   terraform-pipeline:
     needs: terraform-lint
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.terraform.yml@main
@@ -22,4 +22,4 @@ jobs:
     needs: terraform-pipeline
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.docs.yml@main
     with:
-      resources-directory: ./
+      resources-directory: "."
