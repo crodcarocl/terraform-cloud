@@ -1,8 +1,6 @@
-name: Generate terraform docs
+name: Terraform docs
 
 on:
-  pull_request:
-    branches:
   workflow_call:
     inputs:
       resources-directory:
