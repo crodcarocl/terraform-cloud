@@ -8,7 +8,7 @@ on:
 jobs:
   terraform-pipeline:
     uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.terraform.yml@ft/testing
-    with:
+    secrets:
       SBX_OIDC_ARN: ${{ secrets.SBX_OIDC_ARN }}
 
   terraform-docs:
