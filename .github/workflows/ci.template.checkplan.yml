@@ -14,6 +14,13 @@ jobs:
     name: Terraform Plan Analysis
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      max-parallel: 1
+      matrix:
+         include:
+           - environment: development
+
+    timeout-minutes: 15
     steps:
       - name: Code Checkout
         uses: actions/checkout@v2
@@ -26,7 +33,15 @@ jobs:
       - name: Download terraform plan
         uses: actions/download-artifact@v3
         with:
-          name: terraform-plan-${{ github.sha }}
+          name: terraform-plan-${{ matrix.environment }}-${{ github.sha }}
+
+      - name: 'Upload Sarif file with test results'
+        uses: actions/upload-artifact@v3
+        with:
+          name: checkov-result-${{ matrix.environment }}-${{ github.sha }}
+          path: results.sarif
+          if-no-files-found: error
+          retention-days: 5
 
       - name: Test plan with Checkov
         id: checkov
@@ -34,4 +49,4 @@ jobs:
         with:
           directory: ${{inputs.resources-directory}}
           framework: terraform
-          file: ${{ github.sha }}.json
+          file: ${{ github.sha }}-${{ matrix.environment }}.json

@@ -58,15 +58,15 @@ jobs:
         id: plan
         if: github.event_name == 'pull_request'
         run: |
-          terraform plan -out=${{ github.sha }}.tfplan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
-          terraform show -json ${{ github.sha }}.tfplan > ${{ github.sha }}.json
+          terraform plan -out=${{ github.sha }}-${{ matrix.environment }}.tfplan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
+          terraform show -json ${{ github.sha }}-${{ matrix.environment }}.tfplan > ${{ github.sha }}-${{ matrix.environment }}.json
         continue-on-error: false
 
-      - name: 'Upload Artifact'
+      - name: 'Upload Terraform Plan Output'
         uses: actions/upload-artifact@v3
         with:
-          name: terraform-plan-${{ github.sha }}
-          path: ${{ github.sha }}.*
+          name: terraform-plan-${{ matrix.environment }}-${{ github.sha }}
+          path: ${{ github.sha }}-${{ matrix.environment }}.*
           if-no-files-found: error
           retention-days: 5
 
