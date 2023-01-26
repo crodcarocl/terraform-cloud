@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: terraform-plan-${{ github.sha }}
-          path: ${{ github.sha }}..tfplan
+          path: ${{ github.sha }}.*
           if-no-files-found: error
           retention-days: 5
 
