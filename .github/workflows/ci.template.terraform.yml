@@ -25,7 +25,7 @@ jobs:
       matrix:
          include:
            - environment: development
-             runner: ubuntu-lates
+             runner: ubuntu-latest
              aimarn: SBX_OIDC_ARN
           #  - environment: quality
           #    runner: ubuntu-18.04
