@@ -22,10 +22,10 @@ jobs:
          include:
            - environment: development
              runner: ubuntu-latest
-             aimarn: arn:aws:iam::374632989470:role/GithubRole
-           - environment: quality
-             runner: ubuntu-18.04
-             aimarn: TBD
+             aimarn: ${{ secrets.SBX_OIDC_ARN }}
+          #  - environment: quality
+          #    runner: ubuntu-18.04
+          #    aimarn: TBD
     steps:
       - name: Checkout
         uses: actions/checkout@v3
