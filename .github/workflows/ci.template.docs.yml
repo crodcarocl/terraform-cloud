@@ -1,7 +1,7 @@
 name: Terraform docs
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       resources-directory:
         required: true
