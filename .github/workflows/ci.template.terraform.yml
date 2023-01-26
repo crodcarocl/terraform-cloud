@@ -50,7 +50,7 @@ jobs:
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ secrets.[matrix.aimarn] }}
+          role-to-assume: ${{ secrets[matrix.aimarn] }}
           role-session-name: TerraformSession
           aws-region: us-east-1
 
