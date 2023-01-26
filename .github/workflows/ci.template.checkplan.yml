@@ -19,8 +19,6 @@ jobs:
       matrix:
          include:
            - environment: development
-
-    timeout-minutes: 15
     steps:
       - name: Code Checkout
         uses: actions/checkout@v2
