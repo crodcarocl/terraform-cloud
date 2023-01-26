@@ -1,13 +1,13 @@
-name: Terraform Static Security Analysis
+name: Terraform SSA
+
 on:
-  pull_request:
-    branches:
-      - asdf
   workflow_call:
-      inputs:
-        resources-directory:
-          required: true
-          type: string
+    inputs:
+      resources-directory:
+        default: "."
+        description: 'Directory with infrastructure code and/or package manager files to scan'
+        required: true
+        type: string
 
 jobs:
   checkov_analysis:
@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-          
+
       - name: Test with Checkov
         id: checkov
         uses: bridgecrewio/checkov-action@master

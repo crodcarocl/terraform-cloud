@@ -1,16 +1,35 @@
 name: "Terraform Pipeline"
 
 on:
-  push:
-    branches:
-      - asdfd
   workflow_call:
-  pull_request:
+    secrets:
+      SBX_OIDC_ARN:
+        description: 'AWS OIDC ARN for Sandbox'
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   terraform:
-    name: "Terraform Pipeline"
-    runs-on: ubuntu-latest
+    name: "Terrfaorm running on: ${{matrix.runner}} - for env: ${{ matrix.environment }}"
+    runs-on: [ '${{ matrix.runner }}']
+    timeout-minutes: 15
+    strategy:
+      max-parallel: 1
+      matrix:
+         include:
+           - environment: development
+             runner: ubuntu-latest
+             aimarn: SBX_OIDC_ARN
+          #  - environment: quality
+          #    runner: ubuntu-18.04
+          #    aimarn: TBD
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -22,45 +41,35 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: terraform init -backend-config=${{ matrix.environment }}/backend.tfvars -upgrade=true -no-color -input=false
       
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
 
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets[matrix.aimarn] }}
+          role-session-name: TerraformSession
+          aws-region: us-east-1
+
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false
-        continue-on-error: true
+        run: |
+          terraform plan -out=${{ github.sha }}-${{ matrix.environment }}.tfplan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
+          terraform show -json ${{ github.sha }}-${{ matrix.environment }}.tfplan > ${{ github.sha }}-${{ matrix.environment }}.json
+        continue-on-error: false
 
-      - uses: actions/github-script@v6
-        if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+      - name: 'Upload Terraform Plan Output'
+        uses: actions/upload-artifact@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-            <details><summary>Show Plan</summary>
-            \`\`\`\n
-            ${process.env.PLAN}
-            \`\`\`
-            </details>
-            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
-      - name: Terraform Plan Status
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
+          name: terraform-plan-${{ matrix.environment }}-${{ github.sha }}
+          path: ${{ github.sha }}-${{ matrix.environment }}.*
+          if-no-files-found: error
+          retention-days: 5
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false -var-file=${{ matrix.environment }}/terraform.tfvars
