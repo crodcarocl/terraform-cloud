@@ -2,7 +2,7 @@ name: "Terraform Pipeline"
 
 on:
   workflow_call:
-    secrets:
+    inputs:
       SBX_OIDC_ARN:
         description: 'AWS OIDC ARN'
         required: true
@@ -27,7 +27,7 @@ jobs:
          include:
            - environment: development
              runner: ubuntu-latest
-             aimarn: ${{ secrets.SBX_OIDC_ARN }}
+             aimarn: ${{ inputs.SBX_OIDC_ARN }}
           #  - environment: quality
           #    runner: ubuntu-18.04
           #    aimarn: TBD
