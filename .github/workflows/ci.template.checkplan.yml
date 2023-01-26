@@ -33,14 +33,6 @@ jobs:
         with:
           name: terraform-plan-${{ matrix.environment }}-${{ github.sha }}
 
-      - name: 'Upload Sarif file with test results'
-        uses: actions/upload-artifact@v3
-        with:
-          name: checkov-result-${{ matrix.environment }}-${{ github.sha }}
-          path: results.sarif
-          if-no-files-found: error
-          retention-days: 5
-
       - name: Test plan with Checkov
         id: checkov
         uses: bridgecrewio/checkov-action@master
@@ -48,3 +40,11 @@ jobs:
           directory: ${{inputs.resources-directory}}
           framework: terraform
           file: ${{ github.sha }}-${{ matrix.environment }}.json
+
+      - name: 'Upload Sarif file with test results'
+        uses: actions/upload-artifact@v3
+        with:
+          name: checkov-result-${{ matrix.environment }}-${{ github.sha }}
+          path: results.sarif
+          if-no-files-found: error
+          retention-days: 5
