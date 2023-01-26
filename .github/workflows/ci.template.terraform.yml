@@ -53,14 +53,14 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan --output=${{ GITHUB_SHA }}.tfplan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
+        run: terraform plan --output=${{ github.sha }}.tfplan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
         continue-on-error: true
 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: terraform-plan-${{ GITHUB_SHA }}
-          path: ${{ GITHUB_SHA }}.tfplan
+          name: terraform-plan-${{ github.sha }}
+          path: ${{ github.sha }}.tfplan
           retention-days: 5
 
       # - uses: actions/github-script@v6
