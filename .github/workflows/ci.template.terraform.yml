@@ -4,7 +4,7 @@ on:
   workflow_call:
     secrets:
       SBX_OIDC_ARN:
-        description: 'AWS OIDC ARN'
+        description: 'AWS OIDC ARN for Sandbox'
         required: true
 
 permissions:
@@ -57,14 +57,17 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -out=${{ github.sha }}.tfplan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
-        continue-on-error: true
+        run: |
+          terraform plan -out=${{ github.sha }}.tfplan -input=false -var-file=${{ matrix.environment }}/terraform.tfvars -no-color
+          terraform show -json ${{ github.sha }}.tfplan > ${{ github.sha }}.json
+        continue-on-error: false
 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
           name: terraform-plan-${{ github.sha }}
-          path: ${{ github.sha }}.tfplan
+          path: ${{ github.sha }}..tfplan
+          if-no-files-found: error
           retention-days: 5
 
       - name: Terraform Apply
