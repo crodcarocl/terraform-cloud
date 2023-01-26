@@ -6,7 +6,7 @@ on:
       SBX_OIDC_ARN:
         description: 'AWS OIDC ARN'
         required: true
-        
+
 permissions:
   id-token: write
   contents: read
@@ -26,7 +26,7 @@ jobs:
          include:
            - environment: development
              runner: ubuntu-latest
-             aimarn: ${{ inputs.SBX_OIDC_ARN }}
+             aimarn: ${{ secrets.SBX_OIDC_ARN }}
           #  - environment: quality
           #    runner: ubuntu-18.04
           #    aimarn: TBD
