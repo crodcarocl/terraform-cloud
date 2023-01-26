@@ -2,7 +2,7 @@ name: "Terraform Pipeline"
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       SBX_OIDC_ARN:
         description: 'AWS OIDC ARN'
         required: true
