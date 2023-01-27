@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 name: "Terraform docs"
+=======
+name: Terraform docs
+>>>>>>> ef3c5b57063096ef907dcfe4afee0c0753264958
 
 on:
   workflow_call:

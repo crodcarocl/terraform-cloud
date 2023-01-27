@@ -24,10 +24,16 @@ jobs:
       max-parallel: 1
       matrix:
          include:
+<<<<<<< HEAD
            - environment: sandbox
              runner: ubuntu-latest
              aimarn: SBX_OIDC_ARN
              region: us-west-2
+=======
+           - environment: development
+             runner: ubuntu-latest
+             aimarn: SBX_OIDC_ARN
+>>>>>>> ef3c5b57063096ef907dcfe4afee0c0753264958
           #  - environment: quality
           #    runner: ubuntu-18.04
           #    aimarn: TBD
@@ -53,7 +59,11 @@ jobs:
         with:
           role-to-assume: ${{ secrets[matrix.aimarn] }}
           role-session-name: TerraformSession
+<<<<<<< HEAD
           aws-region: ${{ matrix.region }}
+=======
+          aws-region: us-east-1
+>>>>>>> ef3c5b57063096ef907dcfe4afee0c0753264958
 
       - name: Terraform Plan
         id: plan

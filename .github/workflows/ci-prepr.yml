@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 name: Terraform pre-pullrequest
+=======
+name: Terraform Pre-pullrequest
+>>>>>>> ef3c5b57063096ef907dcfe4afee0c0753264958
 
 on:
   push:
@@ -8,6 +12,10 @@ on:
 
 jobs:
   terraform-lint:
+<<<<<<< HEAD
     uses: crodcarocl/testing-actions/.github/workflows/ci.template.checkov.yml@feature/test
+=======
+    uses: crodcarocl/terraform-cloud/.github/workflows/ci.template.checkov.yml@ft/testing
+>>>>>>> ef3c5b57063096ef907dcfe4afee0c0753264958
     with:
       resources-directory: "."
