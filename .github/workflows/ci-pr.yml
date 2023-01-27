@@ -1,0 +1,25 @@
+name: Terraform pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  terraform-pipeline:
+    uses: crodcarocl/testing-actions/.github/workflows/ci.template.terraform.yml@main
+    secrets:
+      SBX_OIDC_ARN: ${{ secrets.SBX_OIDC_ARN }}
+
+  terraform-plan-check:
+    needs: terraform-pipeline
+    uses: crodcarocl/testing-actions/.github/workflows/ci.template.checkplan.yml@main
+    with:
+      resources-directory: "."
+
+  terraform-docs:
+    needs: terraform-plan-check
+    uses: crodcarocl/testing-actions/.github/workflows/ci.template.docs.yml@main
+    with:
+      resources-directory: "."

@@ -1,13 +1,11 @@
-name: Generate terraform docs
+name: "Terraform docs"
+
 on:
-  pull_request:
-    branches:
-      - asdf
   workflow_call:
-      inputs:
-        resources-directory:
-          required: true
-          type: string
+    inputs:
+      resources-directory:
+        required: true
+        type: string
 
 jobs:
   terraform-docs:
@@ -25,6 +23,6 @@ jobs:
         uses: terraform-docs/gh-actions@main
         with:
           working-dir: .
-          output-file: ${{inputs.resources-directory}}/README.md # per module
+          output-file: ${{inputs.resources-directory}}/README.md
           output-method: inject
           git-push: "true"

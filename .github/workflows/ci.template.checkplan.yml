@@ -1,0 +1,50 @@
+name: "Terraform plan-analysis"
+
+on:
+  workflow_call:
+    inputs:
+      resources-directory:
+        default: "."
+        description: 'Directory with infrastructure code and/or package manager files to scan'
+        required: false
+        type: string
+
+jobs:
+  checkov_analysis:
+    name: Terraform Plan Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      max-parallel: 1
+      matrix:
+         include:
+           - environment: development
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Download terraform plan
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform-plan-${{ matrix.environment }}-${{ github.sha }}
+
+      - name: Test plan with Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ${{inputs.resources-directory}}
+          framework: terraform
+          file: ${{ github.sha }}-${{ matrix.environment }}.json
+
+      - name: 'Upload Sarif file with test results'
+        uses: actions/upload-artifact@v3
+        with:
+          name: checkov-result-${{ matrix.environment }}-${{ github.sha }}
+          path: results.sarif
+          if-no-files-found: error
+          retention-days: 5

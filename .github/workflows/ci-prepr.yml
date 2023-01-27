@@ -1,0 +1,13 @@
+name: Terraform pre-pullrequest
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - master
+
+jobs:
+  terraform-lint:
+    uses: crodcarocl/testing-actions/.github/workflows/ci.template.checkov.yml@feature/test
+    with:
+      resources-directory: "."
